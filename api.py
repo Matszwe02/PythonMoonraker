@@ -15,6 +15,7 @@ class MoonrakerAPI:
         self.url = url
         self.token = None
         if not self.url.startswith('http'): self.url = 'http://' + self.url
+        if ':' not in self.url: self.url += ':7125'
     
     
     def __api_call(self, path:str, method = GET, params: dict = {}, output_format = dict, as_file_upload = False):

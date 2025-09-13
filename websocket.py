@@ -96,6 +96,9 @@ class MoonrakerWS:
     async def printer_objects_query(self, objects: dict):
         return await self.__ws_call('/printer/objects/query', params={'objects':objects})
     
+    async def printer_objects_subscribe(self, objects: dict):
+        return await self.__ws_call('/printer/objects/subscribe', params={'objects':objects})
+    
     async def printer_query_endstops_status(self):
         return await self.__ws_call('/printer/query_endstops/status')
     

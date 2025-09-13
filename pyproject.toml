@@ -25,3 +25,6 @@ keywords = ["moonraker", "python"]
 
 [project.urls]
 Homepage = "https://github.com/matszwe02/PythonMoonraker"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/PythonMoonraker"]

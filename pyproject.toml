@@ -1,0 +1,27 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+version = "1.0.0"
+name = "PythonMoonraker"
+description = "Python Moonraker API wrapper"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+  "requests",
+  "websockets"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICENSE*"]
+keywords = ["moonraker", "python"]
+
+
+[project.urls]
+Homepage = "https://github.com/matszwe02/PythonMoonraker"

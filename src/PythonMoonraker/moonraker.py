@@ -1,4 +1,4 @@
-from api import MoonrakerAPI
+from PythonMoonraker.api import MoonrakerAPI
 import threading
 import queue
 

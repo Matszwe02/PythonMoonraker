@@ -1,4 +1,6 @@
 from api import MoonrakerAPI
+import threading
+import queue
 
 
 class Moonraker:
@@ -8,10 +10,29 @@ class Moonraker:
         else:
             self.api = api
         self.last_commands_poll = 0
+
+        self.gcode_queue = queue.Queue()
+        self.worker_thread = threading.Thread(target=self._gcode_worker, daemon=True)
+        self.worker_thread.start()
     
+    def _gcode_worker(self):
+        while True:
+            command = self.gcode_queue.get()
+            if command is None: # Sentinel to stop the thread
+                break
+            self.api.printer_gcode_script(command)
+            self.gcode_queue.task_done()
+
+    def stop_gcode_worker(self):
+        self.gcode_queue.put(None)
+        self.worker_thread.join()
+
     def send_gcode(self, gcode: str) -> bool:
         resp = self.api.printer_gcode_script(gcode)
         return resp.get('result') == 'ok'
+
+    def send_gcode_async(self, gcode: str):
+        self.gcode_queue.put(gcode)
     
     def listdir(self, dir = ''):
         if dir == '':
